@@ -16,5 +16,5 @@ jobs:
       - uses: actions/checkout@v4
       - name: Semgrep
         run: |
-          docker run --rm -v "$PWD:/src" returntocorp/semgrep:latest \
-            semgrep scan --error --config p/ci
+          docker run --rm -v "$PWD:/src" semgrep/semgrep:latest \
+            semgrep scan --error --config p/ci --config .semgrep
