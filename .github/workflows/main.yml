@@ -1,0 +1,9 @@
+name: hacklab-pipeline
+on: [push,pull_request]
+
+jobs:
+  secrets:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - uses: gitleaks/gitleaks-action@v2
