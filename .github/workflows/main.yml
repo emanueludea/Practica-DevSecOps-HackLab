@@ -9,10 +9,12 @@ jobs:
       - uses: gitleaks/gitleaks-action@v2
 
   sast:
+    name: SAST (Semgrep)
     runs-on: self-hosted
     needs: [secrets]
     steps:
       - uses: actions/checkout@v4
       - name: Semgrep
         run: |
-          docker run --rm -v "$PWD:/src" returntocorp/semgrep:latest semgrep scan --error --config p/ci --config .semgrep
+          docker run --rm -v "$PWD:/src" returntocorp/semgrep:latest \
+            semgrep scan --error --config p/ci --config .semgrep
