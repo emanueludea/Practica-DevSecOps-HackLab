@@ -17,4 +17,4 @@ jobs:
       - name: Semgrep
         run: |
           docker run --rm -v "$PWD:/src" returntocorp/semgrep:latest \
-            semgrep scan --error --config p/ci --config .semgrep
+            semgrep scan --error --config p/ci
