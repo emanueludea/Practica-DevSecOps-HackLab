@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
         - name: bad
-          image: demo-app:local
+          image: demo-app:local@sha256:1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
           resources:
             limits:
               cpu: "500m"
