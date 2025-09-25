@@ -12,4 +12,7 @@ spec:
       containers:
         - name: bad
           image: demo-app:local
-          # sin securityContext, sin resources
+          resources:
+            limits:
+              cpu: "500m"
+          # sin securityContext
