@@ -13,16 +13,14 @@ def yaml_parse():
 @app.route('/run')
 def run_cmd():
     cmd = request.args.get('cmd', 'echo hello')
-    # General fix: only allow 'echo' command with arguments, no shell=True
+    # Use Python API instead of system command to avoid command injection
     import shlex
     parts = shlex.split(cmd)
     if not parts or parts[0] != 'echo':
         return {"error": "Only 'echo' command is allowed."}, 400
-    try:
-        out = subprocess.check_output(parts)
-        return {"out": out.decode('utf-8')}
-    except Exception as e:
-        return {"error": str(e)}, 400
+    # Join the arguments and return as output, mimicking echo
+    output = ' '.join(parts[1:]) + '\n'
+    return {"out": output}
 
 @app.route('/')
 def idx():
