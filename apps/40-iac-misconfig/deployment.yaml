@@ -17,4 +17,7 @@ spec:
           image: demo-app:local
           ports:
             - containerPort: 3000
-          # Inseguro a propósito: sin securityContext, sin resources
+          resources:
+            limits:
+              cpu: "500m"
+          # Inseguro a propósito: sin securityContext
