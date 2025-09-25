@@ -13,9 +13,16 @@ def yaml_parse():
 @app.route('/run')
 def run_cmd():
     cmd = request.args.get('cmd', 'echo hello')
-    # Inseguro a propósito: sin validación (command injection)
-    out = subprocess.check_output(cmd, shell=True)
-    return {"out": out.decode('utf-8')}
+    # General fix: only allow 'echo' command with arguments, no shell=True
+    import shlex
+    parts = shlex.split(cmd)
+    if not parts or parts[0] != 'echo':
+        return {"error": "Only 'echo' command is allowed."}, 400
+    try:
+        out = subprocess.check_output(parts)
+        return {"out": out.decode('utf-8')}
+    except Exception as e:
+        return {"error": str(e)}, 400
 
 @app.route('/')
 def idx():
